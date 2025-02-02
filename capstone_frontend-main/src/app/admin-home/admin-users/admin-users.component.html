@@ -1,0 +1,44 @@
+<div class="admin-dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo"  routerLink="/admin-home">Admin Dashboard</div>
+      <nav>
+        <ul>
+          <li class="active" (click)="navigateTo('users')">USERS</li>
+          <li  routerLink="/admin-constructors" >CONSTRUCTORS</li>
+        </ul>
+      </nav>
+      <div class="logout" routerLink="/login">LOGOUT</div>
+    </aside>
+  
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="header">USER</div>
+  
+      <div class="users-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>BUILT AREA</th>
+              <th>CONSTRUCTION TYPE</th>
+              <th>CONSTRUCTION ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.name }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.builtArea }}</td>
+              <td>{{ user.constructionType }}</td>
+              <td>{{ user.constructionId }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  

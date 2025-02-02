@@ -1,0 +1,44 @@
+<!-- src/app/components/constructor-page/constructor-page.component.html -->
+<div class="constructor-list">
+    <app-navbar></app-navbar>
+    <h2>Select a Constructor</h2>
+    <table mat-table [dataSource]="constructors" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let constructor"> {{ constructor.name }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="experience">
+        <th mat-header-cell *matHeaderCellDef> Experience </th>
+        <td mat-cell *matCellDef="let constructor"> {{ constructor.experience }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="specialization">
+        <th mat-header-cell *matHeaderCellDef> Specialization </th>
+        <td mat-cell *matCellDef="let constructor"> {{ constructor.specialization }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="availability">
+        <th mat-header-cell *matHeaderCellDef> Availability </th>
+        <td mat-cell *matCellDef="let constructor">
+          {{ constructor.availability ? 'Available' : 'Not Available' }}
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="['name', 'experience', 'specialization', 'availability']"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['name', 'experience', 'specialization', 'availability'];"
+        (click)="onSelectConstructor(row)"
+        [class.selected]="row === selectedConstructor"
+      ></tr>
+    </table>
+  </div>
+  
+  <div class="report-section" *ngIf="selectedConstructor">
+    <h3>Selected Constructor: {{ selectedConstructor.name }}</h3>
+    <button mat-raised-button color="primary" (click)="generateReport()">
+      Generate Report
+    </button>
+  </div>
+  

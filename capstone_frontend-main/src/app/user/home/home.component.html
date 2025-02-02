@@ -1,0 +1,201 @@
+
+<!-- <div class="form-container">
+  
+  <app-navbar></app-navbar>
+  
+
+  
+  <div class="form-content">
+    <h1>Cost Estimator</h1>
+    <h2>FIND OUT HOW MUCH YOUR HOME-BUILDING PROJECT WILL COST</h2>
+
+    <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid"> -->
+        <!-- Name -->
+        <!-- <div class="form-group">
+          <input id="name" formControlName="name" type="text" placeholder="NAME" />
+        </div> -->
+
+        <!-- State -->
+        <!-- <div class="form-group">
+          <select id="state" formControlName="state">
+            <option value="" disabled selected hidden>STATE</option>
+            <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+          </select>
+        </div> -->
+
+        <!-- Email -->
+        <!-- <div class="form-group">
+          <input id="email" formControlName="email" type="email" placeholder="EMAIL" />
+        </div> -->
+
+        <!-- City -->
+        <!-- <div class="form-group">
+          <select id="city" formControlName="city">
+            <option value="" disabled selected hidden>CITY</option>
+            <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+          </select>
+        </div> -->
+        
+
+        <!-- Phone Number -->
+        <!-- <div class="form-group">
+          <input id="phoneNumber" formControlName="phoneNumber" type="text" placeholder="PHONE NUMBER" />
+        </div> -->
+
+        <!-- Built-Up Area -->
+        <!-- <div class="form-group">
+          <input id="builtUpArea" formControlName="builtUpArea" type="number" placeholder="BUILT AREA" />
+          <span class="unit">SQ. FEET</span>
+        </div> -->
+
+        <!-- Construction Type -->
+        <!-- <div class="form-group">
+          <select id="constructionType" formControlName="constructionType" placeholder="BUILT AREA">
+            <option value="" disabled selected hidden>CONSTRUCTION TYPE</option>
+            <option value="New Construction">New Construction</option>
+            <option value="Renovation">Renovation</option>
+            <option value="Interior Design">Interior Design</option>
+          </select>
+        </div> -->
+
+        <!-- Total Floors -->
+        <!-- <div class="form-group">
+          <input id="totalFloors" formControlName="totalFloors" type="number" placeholder="TOTAL FLOORS" />
+        </div> -->
+
+        <!-- Material Quality -->
+        <!-- <div class="form-group">
+          <select id="materialQuality" formControlName="materialQuality" aria-placeholder="MATERIAL QUALITY">
+            <option value="" disabled selected hidden>MATERIAL QUALITY</option>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+            <option value="Luxury">Luxury</option>
+          </select>
+        </div> -->
+
+        
+      <!-- </div> -->
+
+      <!-- Submit Button -->
+      <!-- <button type="submit" [disabled]="userDetailsForm.invalid">CALCULATE</button> -->
+      <!-- <div class="button-group">
+        <button type="submit" class="calculate-button">Calculate</button> -->
+       
+       
+        <!-- <button
+          type="button"
+          class="explore-materials-button"
+          (click)="navigateToMaterials()"
+        >
+          Explore Materials
+        </button> -->
+
+        <!-- <button routerLink="/materials" class="nav-button">Explore Materials</button>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+
+<div class="form-container">
+  <!-- Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Form Content -->
+  <div class="form-content">
+    <h1>Cost Estimator</h1>
+    <h2>FIND OUT HOW MUCH YOUR HOME-BUILDING PROJECT WILL COST</h2>
+
+    <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">
+      <div class="form-grid">
+        <!-- Name -->
+        <div class="form-group">
+          <input id="name" formControlName="name" type="text" placeholder="NAME" />
+        </div>
+
+        <!-- State -->
+        <div class="form-group">
+          <select id="state" formControlName="state" (change)="onStateChange($event)">
+            <option value="" disabled selected hidden>STATE</option>
+            <option *ngFor="let state of states" [value]="state">{{ state }}</option>
+          </select>
+        </div>
+
+        <!-- City -->
+        <div class="form-group">
+          <select id="city" formControlName="city">
+            <option value="" disabled selected hidden>CITY</option>
+            <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+          </select>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <input id="email" formControlName="email" type="email" placeholder="EMAIL" />
+        </div>
+
+        <!-- Phone Number -->
+        <div class="form-group">
+          <input id="phoneNumber" formControlName="phoneNumber" type="text" placeholder="PHONE NUMBER" />
+        </div>
+
+        <!-- Built-Up Area -->
+        <div class="form-group">
+          <input id="builtUpArea" formControlName="builtUpArea" type="number" placeholder="BUILT AREA" />
+          <span class="unit">SQ. FEET</span>
+        </div>
+
+        <!-- Construction Type -->
+        <div class="form-group">
+          <select id="constructionType" formControlName="constructionType">
+            <option value="" disabled selected hidden>CONSTRUCTION TYPE</option>
+            <option value="New Construction">New Construction</option>
+            <option value="Renovation">Renovation</option>
+            <option value="Interior Design">Interior Design</option>
+          </select>
+        </div>
+
+        <!-- Total Floors -->
+        <div class="form-group">
+          <input id="totalFloors" formControlName="totalFloors" type="number" placeholder="TOTAL FLOORS" />
+        </div>
+
+        <!-- Material Quality -->
+        <div class="form-group">
+          <select id="materialQuality" formControlName="materialQuality">
+            <option value="" disabled selected hidden>MATERIAL QUALITY</option>
+            <option value="Standard">Standard</option>
+            <option value="Premium">Premium</option>
+            <option value="Luxury">Luxury</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <input id="propertyName" formControlName="propertyName" type="text" placeholder="PROPERTY NAME" />
+        </div>
+
+        <div class="form-group">
+          <!-- <label for="landClearance">Land Clearance</label> -->
+          <select id="landClearance" formControlName="landClearance">
+            <option value="" disabled selected hidden>Select Land Clearance</option>
+            <option value="true">True</option>
+            <option value="false">False</option>
+            <!-- <label for="landClearance">Land Clearance</label> -->
+            <!-- <span class="unit">Land Clearance</span> -->
+          </select>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="button-group">
+        <button type="submit" class="calculate-button">Submit</button>
+        <button routerLink="/materials" class="nav-button">Explore Materials</button>
+      </div>
+    </form>
+    <button (click)="calculateCost()">Calculate Cost</button>
+  <div *ngIf="totalCost !== null">
+    <p>The total calculated cost is: {{ totalCost }}</p>
+  </div>
+  </div>
+</div>

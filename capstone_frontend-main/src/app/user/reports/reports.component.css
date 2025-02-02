@@ -1,0 +1,17 @@
+/* src/app/components/constructor-page/constructor-page.component.css */
+.constructor-list {
+    margin: 20px;
+  }
+  
+  .report-section {
+    margin-top: 20px;
+  }
+  
+  table {
+    width: 100%;
+  }
+  
+  .selected {
+    background-color: #f1f1f1;
+  }
+  

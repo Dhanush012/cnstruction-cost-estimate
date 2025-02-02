@@ -1,0 +1,56 @@
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Space between logo and buttons */
+  align-items: center; /* Vertically align items */
+  background-color: #ffffff;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%; /* Full width */
+}
+
+.logo img {
+  margin-left: 20px;
+  height: 70px; /* Adjust the size of the logo */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.nav-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.nav-button {
+  font-size: 18px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+  background-color: #1f1e1e;
+  color: white;
+}
+
+.logout:hover {
+  background-color: rgb(156, 22, 22);
+  color: white;
+}
+
+.logout:active {
+  background-color: #ffffff;
+  color: rgb(156, 22, 22);
+}
+
+.nav-button.active {
+  background-color: #ffffff; /* Example color for the active button */
+  color: rgb(0, 0, 0); /* Example text color for the active button */
+  border: 1px solid #000000; /* Example border for the active button */
+}
+.nav-button.active {
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+}

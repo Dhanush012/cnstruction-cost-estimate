@@ -1,0 +1,50 @@
+<div class="material-summary-container">
+  <app-navbar></app-navbar>
+  <h1 class="header">Estimate Summary</h1>
+
+  <div class="content">
+    <!-- Pie Chart -->
+    <div class="chart-container">
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <!-- Table -->
+    <div class="table-container">
+      <table mat-table [dataSource]="materialData" class="mat-elevation-z8" *ngIf="materialData.length">
+        <!-- Columns -->
+        <ng-container matColumnDef="resource">
+          <th mat-header-cell *matHeaderCellDef> Resource </th>
+          <td mat-cell *matCellDef="let element"> {{ element.resource }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantity </th>
+          <td mat-cell *matCellDef="let element"> {{ element.quantity }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="quality">
+          <th mat-header-cell *matHeaderCellDef> Quality </th>
+          <td mat-cell *matCellDef="let element"> {{ element.quality }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="amount">
+          <th mat-header-cell *matHeaderCellDef> Amount </th>
+          <td mat-cell *matCellDef="let element"> {{ element.amount | currency:'INR' }} </td>
+        </ng-container>
+
+        <!-- Header and Row Definitions -->
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!-- Fallback Message -->
+      <p *ngIf="!materialData.length">Loading data...</p>
+
+      <!-- Next Button -->
+      <button routerLink="/reports" class="next-btn">Next</button>
+    </div>
+  </div>
+</div>
+
+  
+
