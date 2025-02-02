@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-CostEstimatorApplication<CostEstimator>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.ConstructionCalculator.CostEstimator.CostEstimatorApplication",
+            "projectName": "CostEstimator",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

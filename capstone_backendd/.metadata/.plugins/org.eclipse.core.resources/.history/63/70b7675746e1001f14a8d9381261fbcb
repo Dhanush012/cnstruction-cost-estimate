@@ -1,0 +1,5 @@
+package com.ust.api_gateway.corsconfig;
+
+public class corsCongif {
+
+}
