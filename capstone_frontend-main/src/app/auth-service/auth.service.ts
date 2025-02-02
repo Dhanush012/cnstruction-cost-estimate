@@ -65,17 +65,14 @@ export class AuthService {
     return !!this.getToken();
   }
 
-  // Register User
-  registerUser(userData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/register`, userData, {
-      responseType: 'text', // Backend returns plain text message
-    });
+  registerUser(userData: { username: string, email: string, password: string, role: string }) {
+    return this.http.post(`${this.apiUrl}/register`, userData);
   }
-
-  // Login User
-  loginUser(credentials: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/login`, credentials);
+  
+  loginUser(credentials: { role: string, email: string, password: string }) {
+    return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials);
   }
+  
 
   // Store JWT Token in localStorage
   storeToken(token: string): void {

@@ -1,22 +1,21 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../auth-service/auth.service';
-import { RouterModule } from '@angular/router';  // ✅ Add this import
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register',
-  standalone: true,
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule], // ✅ Ensure RouterModule is imported
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule]
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   errorMessage: string = '';
   successMessage: string = '';
+  role: string = ''; // Role will be passed from login
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
@@ -24,7 +23,16 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      role: ['', Validators.required] // Adding role field to the form
     }, { validators: this.passwordMatchValidator });
+  }
+
+  ngOnInit(): void {
+    // Retrieve the role passed from the login page if necessary
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras.state) {
+      this.role = navigation.extras.state['role'] || 'user';  // Default to 'user' if no role passed
+    }
   }
 
   passwordMatchValidator(form: FormGroup) {
@@ -33,84 +41,19 @@ export class RegisterComponent {
 
   onRegister() {
     if (this.registerForm.valid) {
-      const { username, email, password } = this.registerForm.value;
-      this.authService.registerUser({ username, email, password }).subscribe({
+      const { username, email, password, role } = this.registerForm.value;
+      this.authService.registerUser({ username, email, password, role }).subscribe({
         next: (response) => {
-          this.successMessage = response;
-          this.errorMessage = '';
-          setTimeout(() => this.router.navigate(['/login']), 1500); // Redirect to login page after successful registration
+          this.successMessage = "Registration successful!";
+          this.errorMessage = '';  // Clear any previous error message
+          setTimeout(() => this.router.navigate(['/login']), 1500);  // Redirect to login page after successful registration
         },
-        error: (error) => {
-          this.errorMessage = 'Registration failed: ' + error.error;
+        error: (err) => {
+          this.errorMessage = "Registration successful!";
+          this.successMessage = '';  // Clear any previous success message
         }
       });
     }
   }
-}
-
-// import { Component } from '@angular/core';
-// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { Router } from '@angular/router';
-// import { CommonModule } from '@angular/common';
-// import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-// import { AuthService } from '../../auth-service/auth.service';
-// import { RouterModule } from '@angular/router';  // ✅ Add this import
-
-// @Component({
-//   selector: 'app-register',
-//   templateUrl: './register.component.html',
-//   styleUrls: ['./register.component.css'],
-//   standalone: true,
-//   imports: [CommonModule, ReactiveFormsModule, FormsModule, RouterModule]
-// })
-// export class RegisterComponent {
-//   registerForm: FormGroup;
-//   errorMessage: string = '';
-//   successMessage: string = '';
-
-//   constructor(
-//     private fb: FormBuilder,
-//     private authService: AuthService,
-//     private router: Router
-//   ) {
-//     this.registerForm = this.fb.group({
-//       username: ['', Validators.required],
-//       email: ['', [Validators.required, Validators.email]],
-//       password: ['', Validators.required],
-//       confirmPassword: ['', Validators.required],
-//       role: ['', Validators.required], // Role selection remains in form
-//     }, { validators: this.passwordMatchValidator });
-//   }
-
-//   passwordMatchValidator(form: FormGroup) {
-//     return form.get('password')?.value === form.get('confirmPassword')?.value
-//       ? null
-//       : { mismatch: true };
-//   }
-
-//   onRegister() {
-//     if (this.registerForm.valid) {
-//       const { username, email, password, role } = this.registerForm.value;
-      
-//       // Admin should not be able to register via this page
-//       if (role === 'admin') {
-//         this.errorMessage = 'Admins cannot register through this page.';
-//         return;
-//       }
-
-//       this.authService.registerUser({ username, email, password, role }).subscribe({
-//         next: (response) => {
-//           this.successMessage = 'Registration successful!';
-//           this.errorMessage = '';
-//           setTimeout(() => this.router.navigate(['/login']), 1500); // Redirect to login page after successful registration
-//         },
-//         error: (error) => {
-//           this.errorMessage = 'Registration failed: ' + error.error;
-//         }
-//       });
-//     }
-    
   
-//   }
-
-// }
+}

@@ -11,7 +11,7 @@ export class RegisterService {
   constructor(private http: HttpClient) {}
 
   // Register User
-  register(credentials: { username: string; email: string; password: string }): Observable<any> {
+  register(credentials: { username: string; email: string; password: string ,role:string}): Observable<any> {
     return this.http.post(this.baseUrl, credentials);
   }
 }
