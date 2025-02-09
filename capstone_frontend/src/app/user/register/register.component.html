@@ -1,0 +1,62 @@
+<div class="form-container">
+  <div class="form-card">
+    <h2>Create Account</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+      
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" formControlName="username" required />
+        <div *ngIf="registerForm.get('username')?.invalid && registerForm.get('username')?.touched" class="error-message">
+          Username is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" required />
+        <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched" class="error-message">
+          Valid email is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" required />
+        <div *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched" class="error-message">
+          Password is required.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" required />
+        <!-- Change here to access mismatch error using bracket notation -->
+        <div *ngIf="registerForm.errors?.['mismatch'] && registerForm.get('confirmPassword')?.touched" class="error-message">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Select Role:</label>
+        <div class="role-selection">
+          <label>
+            <input type="radio" formControlName="role" value="constructor" [checked]="role === 'constructor'" /> Constructor
+          </label>
+          <label>
+            <input type="radio" formControlName="role" value="user" [checked]="role === 'user'" /> User
+          </label>
+        </div>
+        <div *ngIf="registerForm.get('role')?.invalid && registerForm.get('role')?.touched" class="error-message">
+          Role selection is required.
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">Sign Up</button>
+    </form>
+    <p *ngIf="successMessage" class="success">{{ successMessage }}</p>
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+    
+
+    <p class="login-link">Already Registered? <a routerLink="/login">Login</a></p>
+  </div>
+</div>

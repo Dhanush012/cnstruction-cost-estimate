@@ -1,0 +1,59 @@
+<div class="admin-dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo"  routerLink="/admin-home">Admin Dashboard</div>
+      <nav>
+        <ul>
+          <li class="active" (click)="navigateTo('users')">USERS</li>
+          <li  routerLink="/admin-constructors" >CONSTRUCTORS</li>
+        </ul>
+      </nav>
+      <div class="logout" routerLink="/login">LOGOUT</div>
+    </aside>
+  
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="header">USER</div>
+  
+      <div class="users-table">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>NAME</th>
+              <th>EMAIL</th>
+              <th>PHONE NUMBER</th>
+              <th>CONSTRUCTION TYPE</th>
+              <th>BUILT AREA</th>
+              <th>STATE</th>
+              <th>CITY</th>
+              <th>TOTAL FLOOR</th>
+              <th>PROPERTY NAME</th>
+              <th>LAND CLEARANCE</th>
+              <th>MATERIAL QUALITY</th>
+              
+              
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.id }}</td>
+              <td>{{ user.userName }}</td>
+              <td>{{ user.userEmail }}</td>
+              <td>{{ user.phoneNumber }}</td>
+              <td>{{ user.constructionType }}</td>
+              <td>{{ user.builtupArea }}</td>
+              <td>{{ user.state }}</td>
+              <td>{{ user.city }}</td>
+              <td>{{ user.totalFloor }}</td>
+              <td>{{ user.propName }}</td>
+              <td>{{ user.landclearence }}</td>
+              <td>{{ user.materialQuality }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+  

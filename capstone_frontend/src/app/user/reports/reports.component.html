@@ -1,0 +1,82 @@
+<!-- src/app/components/constructor-page/constructor-page.component.html -->
+<app-navbar></app-navbar>
+
+<div class="reports-container">
+  <h2>Select Constructor</h2>
+
+  <!-- Display constructors if they are available -->
+  <div *ngIf="constructors.length > 0">
+    <ul>
+      <li *ngFor="let constructor of constructors">
+        <label>
+          <input
+            type="radio"
+            [value]="constructor.id"
+            (change)="onConstructorSelect(constructor.id)"
+          />
+          {{ constructor.name }} (Experience: {{ constructor.experience }} years, Specialization: {{ constructor.specialization }})
+        </label>
+      </li>
+    </ul>
+  </div>
+
+  <!-- If the report data is available, show report details and download button -->
+  <div *ngIf="reportData">
+    <h3>Report for {{ reportData.userName }}</h3>
+    <p><strong>Total Cost:</strong> {{ reportData.totalCost }}</p>
+    <p><strong>Material Details:</strong> {{ reportData.materialDetails }}</p>
+
+    <!-- Download button -->
+    <button (click)="downloadPdf()" [disabled]="!reportData">Download PDF</button>
+  </div>
+
+  <!-- If no constructors are available, show loading message -->
+  <div *ngIf="!constructors.length">
+    <p>Loading constructors...</p>
+  </div>
+</div>
+
+
+<!-- <div class="constructor-list">
+    
+    <h2>Select a Constructor</h2>
+    <table mat-table [dataSource]="constructors" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let constructor"> {{ constructor.name }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="experience">
+        <th mat-header-cell *matHeaderCellDef> Experience </th>
+        <td mat-cell *matCellDef="let constructor"> {{ constructor.experience }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="specialization">
+        <th mat-header-cell *matHeaderCellDef> Specialization </th>
+        <td mat-cell *matCellDef="let constructor"> {{ constructor.specialization }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="availability">
+        <th mat-header-cell *matHeaderCellDef> Availability </th>
+        <td mat-cell *matCellDef="let constructor">
+          {{ constructor.availability ? 'Available' : 'Not Available' }}
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="['name', 'experience', 'specialization', 'availability']"></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['name', 'experience', 'specialization', 'availability'];"
+        (click)="onSelectConstructor(row)"
+        [class.selected]="row === selectedConstructor"
+      ></tr>
+    </table>
+  </div>
+  
+  <div class="report-section" *ngIf="selectedConstructor">
+    <h3>Selected Constructor: {{ selectedConstructor.name }}</h3>
+    <button mat-raised-button color="primary" (click)="generateReport()">
+      Generate Report
+    </button>
+  </div>
+   -->

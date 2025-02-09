@@ -1,0 +1,54 @@
+<div class="login-container"> 
+  <div class="login-box">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <!-- Role Selection -->
+      <div class="role-selector">
+        <label>
+          <input type="radio" formControlName="role" value="user" /> User
+        </label>
+        <label>
+          <input type="radio" formControlName="role" value="admin" /> Admin
+        </label>
+        <label>
+          <input type="radio" formControlName="role" value="constructor" /> Constructor
+        </label>
+      </div>
+      <div *ngIf="loginForm.get('role')?.touched && loginForm.get('role')?.invalid">
+        <span class="error">Please select a role.</span>
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Enter your email" />
+        <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          <span class="error">Enter a valid email address.</span>
+        </div>
+      </div>
+
+      <!-- Password Field -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter your password" />
+        <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          <span class="error">Password is required.</span>
+        </div>
+      </div>
+
+      <!-- Login Button -->
+      <button type="submit" class="btn">Sign In</button>
+
+      <!-- Error Message -->
+      <div *ngIf="loginError" class="error">{{ loginError }}</div>
+    </form>
+
+    <!-- Registration Links -->
+    <p class="routerLink" *ngIf="loginForm.get('role')?.value === 'user'">
+      If new user, register here <a [routerLink]="'/register'">Register</a>
+    </p>
+    <p class="routerLink" *ngIf="loginForm.get('role')?.value === 'constructor'">
+      If new constructor, register here <a [routerLink]="'/constructor-register'">Register</a>
+    </p>
+  </div>
+</div>
